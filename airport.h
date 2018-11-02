@@ -1,13 +1,4 @@
-/**
-Author: Victor Nguyen, Collin Sipple, David Ryan, Alexis Linhardt, Serigne Toure
-My NU ID: 02357235
-CLASS: 155E
-Section 250
-Date Started: 11/01/2018
-Date Finished: 11/02/2018
-*
-*
-*/
+
 typedef struct {
 char *gpsId;
 char *type;
