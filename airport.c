@@ -1,5 +1,5 @@
 /**
-Author: Victor Nguyen, Collin Sipple, David Ryan
+Author: Victor Nguyen, Collin Sipple, David Ryan, Tony Ong, Alexis Linhardt,  Serigne Toure, Jake Wilson
 My NU ID: 02357235
 CLASS: 155E
 Section 250
@@ -30,7 +30,10 @@ double longitude,
 int elevationFeet,
 const char* city,
 const char* countryAbbrv){
-
+if(type == NULL || name == NULL || city == NULL || countryAbbrv == NULL){
+  printf("ERROR\n");
+  return NULL;
+}
 Airport *airport1 = (Airport*) malloc(sizeof(Airport) * 1);
 airport1->gpsId = (char*) malloc(sizeof(char) * (strlen(gpsId) +1));
 strcpy(airport1->gpsId, gpsId);
@@ -63,6 +66,9 @@ double longitude,
 int elevationFeet,
 const char* city,
 const char* countryAbbrv){
+  if(type == NULL || name == NULL || city == NULL || countryAbbrv == NULL){
+    return;
+  }
 airport->gpsId = (char*) malloc(sizeof(char) * (strlen(gpsId) +1));
 strcpy(airport->gpsId, gpsId);
 airport->type = (char*) malloc(sizeof(char) * (strlen(type) +1));
@@ -73,7 +79,8 @@ airport->latitude = latitude;
 airport->longitude = longitude;
 airport->elevationFeet = elevationFeet;
 if( latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-return; }
+return;
+}
 airport->city = (char*) malloc(sizeof(char) * (strlen(city) +1));
 strcpy(airport->city, city);
 airport->countryAbbrv = (char*) malloc(sizeof(char) * (strlen(countryAbbrv) +1));
@@ -129,12 +136,15 @@ double getEstimatedTravelTime(const Airport* stops,
                               int size,
                               double aveKmsPerHour,
                               double aveLayoverTimeHrs){
+if(stops == NULL){
+  return 1;
+}
 double totalDistance = 0;
 for(int i = 1; i < size; i++){
 totalDistance += getAirDistance(&stops[i - 1], &stops[i]);
 }
 double travelTime = totalDistance / aveKmsPerHour;
-double totalTime += (travelTime / aveLayoverTimeHrs);
+double totalTime = travelTime + (aveLayoverTimeHrs * (size - 1));
 
 return totalTime;
 }

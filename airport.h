@@ -1,5 +1,5 @@
 /**
-Author: Victor Nguyen, Collin Sipple, David Ryan
+Author: Victor Nguyen, Collin Sipple, David Ryan, Alexis Linhardt, Serigne Toure
 My NU ID: 02357235
 CLASS: 155E
 Section 250
