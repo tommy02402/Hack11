@@ -1,18 +1,23 @@
-
+/**
+Author: Victor Nguyen, Collin Sipple, David Ryan, Tony Ong, Alexis Linhardt,  Serigne Toure, Jake Wilson
+My NU ID: 02357235
+CLASS: 155E
+Section 250
+Date Started: 11/01/2018
+Date Finished: 11/02/2018
+*
+*
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-
 #include "airport.h"
+// A factory function to create a new Airport with the given
+// attributes.  This function should make *deep* copies of each
+// of the relevant fields and return a pointer to the newly
+// created Airport structure.
 
-
-/**
-* A factory function to create a new Airport with the given
-* attributes.  This function should make *deep* copies of each
-* of the relevant fields and return a pointer to the newly
-* created Airport structure.
-*/
 Airport* createAirport(const char* gpsId,
 const char* type,
 const char* name,
@@ -44,10 +49,10 @@ strcpy(airport1->countryAbbrv, countryAbbrv);
 return airport1;
 }
 
-/**
-* This function initializes an existing allocated
-* Airport structure with the given attributes.
-*/
+
+ // This function initializes an existing allocated
+ // Airport structure with the given attributes.
+
 void initAirport(Airport* airport,
 const char* gpsId,
 const char* type,
@@ -78,13 +83,9 @@ airport->countryAbbrv = (char*) malloc(sizeof(char) * (strlen(countryAbbrv) +1))
 strcpy(airport->countryAbbrv, countryAbbrv);
 return;
 }
-//
-// airport->gpsId = (char*)malloc(sizeof(char) * (strlen(gpsId) + 1));
-//  strcpy(airport->gpsId, gpsId);
-/**
-* Constructs a new string representation of the given
-* Airport structure.
-*/
+// Constructs a new string representation of the given
+// Airport structure.
+
 char* airportToString(const Airport* a){
 if (a == NULL) {
 char *result1 = (char *)malloc(sizeof(char) * 7);
@@ -107,10 +108,10 @@ a->longitude, a->elevationFeet, a->city, a->countryAbbrv);
 return str;
 }
 
-/**
-* Computes the air distance, in kilometers, between
-* the two Airports using their latitude/longitude
-*/
+
+// Computes the air distance, in kilometers, between
+// the two Airports using their latitude/longitude
+
 
 double getAirDistance(const Airport* origin, const Airport* destination){
 int R = 6371;
@@ -122,7 +123,9 @@ double difference = (long2Rad - long1Rad);
 double answer = (acos(((sin(lat1Rad)) * sin(lat2Rad)) + (cos(lat1Rad) * cos(lat2Rad) * cos(difference))) * R);
 return answer;
 }
-
+//Computes the estimated travel time (in hours) for a flight
+// that involves the given stops using the average flight speed
+// (kilometers per hour) and average layover time (in hours)
 double getEstimatedTravelTime(const Airport* stops,
                               int size,
                               double aveKmsPerHour,
@@ -135,7 +138,7 @@ for(int i = 1; i < size; i++){
 totalDistance += getAirDistance(&stops[i - 1], &stops[i]);
 }
 double travelTime = totalDistance / aveKmsPerHour;
-double totalTime = travelTime + (aveLayoverTimeHrs * (size - 1));
+double totalTime = travelTime + (aveLayoverTimeHrs * (size - 2));
 
 return totalTime;
 }
